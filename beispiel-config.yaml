@@ -1,0 +1,51 @@
+model_list:
+  # --- ANTHROPIC MODELLE ---
+  - model_name: claude-3-5-sonnet
+    litellm_params:
+      model: anthropic/claude-3-5-sonnet-20241022  # Exakte API-ID von Anthropic
+      api_key: "os.environ/ANTHROPIC_API_KEY"       # Lädt den Key sicher aus den VPS-Umgebungsvariablen
+
+  - model_name: claude-3-5-haiku
+    litellm_params:
+      model: anthropic/claude-3-5-haiku-20241022
+      api_key: "os.environ/ANTHROPIC_API_KEY"
+
+  # --- OPENAI MODELLE ---
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: "os.environ/OPENAI_API_KEY"
+
+  - model_name: gpt-4o-mini
+    litellm_params:
+      model: openai/gpt-4o-mini
+      api_key: "os.environ/OPENAI_API_KEY"
+
+  # --- GOOGLE GEMINI MODELLE ---
+  - model_name: gemini/gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: "os.environ/GEMINI_API_KEY"
+
+  # --- ALTERNATIV: LOKALE ODER OPEN-SOURCE MODELLE (Z.B. OLLAMA ODER DEEPSEEK) ---
+  # - model_name: deepseek-coder
+  #   litellm_params:
+  #     model: openai/deepseek-coder                 # Falls über DeepSeek API angebunden
+  #     api_base: https://deepseek.com
+  #     api_key: "os.environ/DEEPSEEK_API_KEY"
+
+
+# --- ALLGEMEINE PROXY-EINSTELLUNGEN ---
+litellm_settings:
+  drop_params: true                      # Ignoriert Parameter, die ein Modell nicht versteht (verhindert API-Fehler)
+  set_verbose: false                     # Auf 'true' setzen, um detaillierte Logs auf dem VPS zu sehen
+  telemetry: false                       # Deaktiviert die Datenübermittlung an LiteLLM
+
+
+# --- SICHERHEIT UND ZUGRIFF ---
+router_settings:
+  routing_strategy: latency-based-routing # Wählt bei redundanten Keys den schnellsten Server
+
+
+general_settings:
+  master_key: "os.environ/LITELLM_MASTER_KEY" # Der geheime Schlüssel, den Ihr lokaler PC zur Authentifizierung nutzt

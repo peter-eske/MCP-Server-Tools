@@ -1,0 +1,13 @@
+services:
+  debate-server:
+    build: .
+    container_name: debate-server
+    ports:
+      - "8000:8000"
+    environment:
+      - LITELLM_API_BASE=http://host.docker.internal:4000
+      - LITELLM_API_KEY=
+      - MCP_TRANSPORT=sse
+      - PORT=8000
+    volumes:
+      - ./logs:/app/logs

@@ -1,0 +1,140 @@
+---
+config:
+  theme: base
+  themeVariables:
+    primaryColor: "#1e293b"
+    secondaryColor: "#334155"
+    tertiaryColor: "#0f172a"
+    mainBkg: "#1e293b"
+    nodeBorder: "#475569"
+    clusterBkg: "#0f172a"
+    clusterBorder: "#334155"
+    titleColor: "#e2e8f0"
+    edgeLabelBackground: "#1e293b"
+    nodeTextColor: "#e2e8f0"
+---
+flowchart LR
+  classDef client fill:#6366f1,color:#fff,stroke:#818cf8,stroke-width:2px
+  classDef server fill:#f59e0b,color:#fff,stroke:#fbbf24,stroke-width:2px
+  classDef mode fill:#78716c,color:#fff,stroke:#a8a29e,stroke-width:2px
+  classDef proxy fill:#3b82f6,color:#fff,stroke:#60a5fa,stroke-width:2px
+  classDef model fill:#10b981,color:#fff,stroke:#34d399,stroke-width:2px
+  classDef storage fill:#ef4444,color:#fff,stroke:#f87171,stroke-width:2px
+  classDef deploy fill:#14b8a6,color:#fff,stroke:#2dd4bf,stroke-width:2px
+  classDef test fill:#ec4899,color:#fff,stroke:#f472b6,stroke-width:2px
+  classDef decision fill:#78716c,color:#fff,stroke:#a8a29e,stroke-width:2px
+
+  %% ═══════ CLIENT ═══════
+  subgraph Client["CLIENT"]
+    direction TB
+    C["MCP-Client (OpenCode)\nIT: ruft JSON-RPC-Tools auf | Alle: KI-Assistent"]
+  end
+
+  %% ═══════ TRANSPORT ═══════
+  subgraph Transport["TRANSPORT"]
+    direction TB
+    TM{"MCP_TRANSPORT"}
+    Stdio["stdio\nIT: stdin/stdout-Pipe | Alle: Direktverbindung"]
+    SSE["sse\nIT: HTTP-Server :8000 | Alle: Netzwerkzugriff"]
+    TM -->|"Default"| Stdio
+    TM -->|"MCP_TRANSPORT=sse"| SSE
+  end
+
+  %% ═══════ SERVER ═══════
+  subgraph Server["MCP DEBATE SERVER"]
+    direction TB
+    S["advanced_debate_server.py\nIT: FastMCP, 3-Phasen-Debatte | Alle: KI-Debattenleiter"]
+    L["📁 Debate Logs\nIT: logs/debates/*.md | Alle: Gesprächsprotokolle"]
+    S -.->|"schreibt"| L
+  end
+
+  %% ═══════ MODI ═══════
+  subgraph Modi["BETRIEBSMODI (LITELLM_API_BASE)"]
+    direction TB
+    PM["Proxy-Modus\nIT: OpenAI Client, max_retries=0 | Alle: sendet an KI-Verteiler"]
+    DM["Direkt-Modus\nIT: litellm.completion + RateLimit | Alle: spricht direkt mit KI"]
+    RL["⏱ RateLimiter\nIT: Token-Bucket 10 RPM | Alle: Drosselt bei Überlast"]
+  end
+
+  %% ═══════ LITELM PROXY ═══════
+  subgraph Proxy["LITELM PROXY (VPS / DOCKER)"]
+    direction TB
+    G["🔄 LiteLLM Gateway :4000\nIT: YAML-Routing, latency-based | Alle: KI-Verteiler"]
+    CFG["📄 Proxy-Config\nIT: beispiel-config.yaml | Alle: Modelle & Einstellungen"]
+    PG["🗄 PostgreSQL :5432\nIT: Usage-DB, API-Keys | Alle: Verwaltungsdatenbank"]
+    G -.->|"liest"| CFG
+    G -.->|"speichert"| PG
+  end
+
+  %% ═══════ KI-MODELLE ═══════
+  subgraph Modelle["KI-MODELLE (CLOUD-APIS)"]
+    direction TB
+    CLD["Claude 3.5 Sonnet\nIT: anthropic API | Alle: KI von Anthropic – komplexe Analyse"]
+    GPT["GPT-4o\nIT: openai API | Alle: KI von OpenAI – Code & Logik"]
+    GEM["Gemini 2.5 Flash\nIT: google API | Alle: KI von Google – effizient & günstig"]
+  end
+
+  %% ═══════ DEPLOYMENT ═══════
+  subgraph Deploy["DEPLOYMENT (DOCKER)"]
+    direction TB
+    D["🐳 Dockerfile\nIT: python:3.12-slim, ENV zur Laufzeit | Alle: Server-Paket"]
+    DC["📦 docker-compose.yml\nIT: Server + LiteLLM :4000 | Alle: Vorkonfiguriertes Setup"]
+    N["🌐 NGINX\nIT: proxy_buffering off für SSE | Alle: Internet-Empfang"]
+    D -->|"docker build"| DC
+    DC -->|"proxied by"| N
+  end
+
+  %% ═══════ TEST ═══════
+  subgraph Test["TEST-INFRASTRUKTUR"]
+    direction TB
+    NV["🧪 NVIDIA NIM\nIT: deepseek-v4-flash, NVIDIA_API_KEY | Alle: Test-KI-Modell"]
+    TC["🧪 docker-compose.test.yml\nIT: PG + LiteLLM + Debate-Server | Alle: Vollständige Test-Umgebung"]
+    NV <-->|"vollständiger Stack"| TC
+  end
+
+  %% ═══════ HAUPTPFAD: CLIENT → TRANSPORT → SERVER ═══════
+  C <-->|"MCP-Protokoll (JSON-RPC)"| TM
+  Stdio <-->|"request/response"| S
+  SSE <-->|"request/response"| S
+
+  %% ═══════ SERVER → MODI ═══════
+  S -->|"LITELLM_API_BASE gesetzt"| PM
+  S -->|"LITELLM_API_BASE leer"| DM
+
+  %% ═══════ MODI → LITELM ═══════
+  PM -->|"OpenAI Client"| G
+  DM -->|"litellm.completion"| RL
+  RL -->|"max 10 RPM"| G
+
+  %% ═══════ LITELM → MODELLE ═══════
+  G <-->|"anfragen / antworten"| CLD
+  G <-->|"anfragen / antworten"| GPT
+  G <-->|"anfragen / antworten"| GEM
+
+  %% ═══════ TESTS ═══════
+  G -.->|"optional"| NV
+
+  %% ═══════ DEPLOYMENT ═══════
+  S -.->|"verpackt als"| D
+
+  %% ═══════ KLASSEN ═══════
+  class C client
+  class S server
+  class L storage
+  class TM decision
+  class Stdio decision
+  class SSE decision
+  class PM mode
+  class DM mode
+  class RL test
+  class G proxy
+  class CFG storage
+  class PG storage
+  class CLD model
+  class GPT model
+  class GEM model
+  class D deploy
+  class DC deploy
+  class N deploy
+  class NV test
+  class TC test

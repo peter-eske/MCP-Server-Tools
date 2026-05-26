@@ -24,13 +24,13 @@ model_list:
       api_key: os.environ/OPENAI_API_KEY
 
   # ── GOOGLE GEMINI (Cloud) ──────────────────────────────────────────────
-  - model_name: gemini/gemini-2.5-flash
+  - model_name: gemini-2.5-flash
     litellm_params:
       model: gemini/gemini-2.5-flash
       api_key: os.environ/GEMINI_API_KEY
 
-  # ── NVIDIA NIM (Self-Hosted) ───────────────────────────────────────────
-  - model_name: deepseek-ai/deepseek-v4-flash
+  # ── NVIDIA NIM ─────────────────────────────────────────────────────────
+  - model_name: deepseek-v4-flash
     litellm_params:
       model: openai/deepseek-ai/deepseek-v4-flash
       api_base: https://integrate.api.nvidia.com/v1
@@ -69,6 +69,135 @@ model_list:
       temperature: 0.2
       num_retries: 0
       request_timeout: 180
+
+  # ── ALIBABA CLOUD (Tongyi Qwen) ────────────────────────────────────────
+  - model_name: qwen-max
+    litellm_params:
+      model: openai/qwen-max
+      api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api_key: os.environ/ALIBABA_API_KEY
+
+  - model_name: qwen-plus
+    litellm_params:
+      model: openai/qwen-plus
+      api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api_key: os.environ/ALIBABA_API_KEY
+
+  - model_name: qwen-turbo
+    litellm_params:
+      model: openai/qwen-turbo
+      api_base: https://dashscope.aliyuncs.com/compatible-mode/v1
+      api_key: os.environ/ALIBABA_API_KEY
+
+  # ── GROQ ───────────────────────────────────────────────────────────────
+  - model_name: groq/llama-3.3-70b
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: groq/llama-3.1-8b
+    litellm_params:
+      model: groq/llama-3.1-8b-instant
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: groq/deepseek-r1
+    litellm_params:
+      model: groq/deepseek-r1-distill-llama-70b
+      api_key: os.environ/GROQ_API_KEY
+
+  # ── OPENROUTER ─────────────────────────────────────────────────────────
+  - model_name: openrouter/claude-3.5-sonnet
+    litellm_params:
+      model: openai/anthropic/claude-3.5-sonnet
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY
+
+  - model_name: openrouter/gpt-4o
+    litellm_params:
+      model: openai/openai/gpt-4o
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY
+
+  - model_name: openrouter/deepseek-v4
+    litellm_params:
+      model: openai/deepseek/deepseek-chat
+      api_base: https://openrouter.ai/api/v1
+      api_key: os.environ/OPENROUTER_API_KEY
+
+  # ── TOGETHER AI ────────────────────────────────────────────────────────
+  - model_name: together/llama-3.3-70b
+    litellm_params:
+      model: together_ai/meta-llama/Llama-3.3-70B-Instruct-Turbo
+      api_key: os.environ/TOGETHER_API_KEY
+
+  - model_name: together/deepseek-v4
+    litellm_params:
+      model: together_ai/deepseek-ai/DeepSeek-V4
+      api_key: os.environ/TOGETHER_API_KEY
+
+  - model_name: together/qwen-3-coder
+    litellm_params:
+      model: together_ai/Qwen/Qwen3-Coder-480B-A35B
+      api_key: os.environ/TOGETHER_API_KEY
+
+  # ── CEREBRAS ───────────────────────────────────────────────────────────
+  - model_name: cerebras/llama-3.3-70b
+    litellm_params:
+      model: openai/meta-llama/Llama-3.3-70b
+      api_base: https://api.cerebras.ai/v1
+      api_key: os.environ/CEREBRAS_API_KEY
+
+  # ── HUGGING FACE ───────────────────────────────────────────────────────
+  - model_name: huggingface/mistral-7b
+    litellm_params:
+      model: huggingface/mistralai/Mistral-7B-Instruct-v0.3
+      api_key: os.environ/HF_API_KEY
+
+  # ── X.AI (Grok) ────────────────────────────────────────────────────────
+  - model_name: grok-2
+    litellm_params:
+      model: openai/grok-2
+      api_base: https://api.x.ai/v1
+      api_key: os.environ/XAI_API_KEY
+
+  - model_name: grok-3
+    litellm_params:
+      model: openai/grok-3
+      api_base: https://api.x.ai/v1
+      api_key: os.environ/XAI_API_KEY
+
+  # ── GITHUB COPILOT ─────────────────────────────────────────────────────
+  - model_name: copilot/gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_base: https://api.githubcopilot.com
+      api_key: os.environ/COPILOT_API_KEY
+
+  - model_name: copilot/claude-3.5-sonnet
+    litellm_params:
+      model: openai/claude-3.5-sonnet
+      api_base: https://api.githubcopilot.com
+      api_key: os.environ/COPILOT_API_KEY
+
+  # ── API.AIRFORCE ───────────────────────────────────────────────────────
+  - model_name: airforce/gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_base: https://api.airforce/v1
+      api_key: os.environ/AIRFORCE_API_KEY
+
+  - model_name: airforce/claude-3.5-sonnet
+    litellm_params:
+      model: openai/claude-3.5-sonnet
+      api_base: https://api.airforce/v1
+      api_key: os.environ/AIRFORCE_API_KEY
+
+  # ── CLOUDFLARE WORKERS AI ──────────────────────────────────────────────
+  - model_name: cf/llama-3.3-70b
+    litellm_params:
+      model: openai/@cf/meta-llama/llama-3.3-70b-instruct
+      api_base: https://api.cloudflare.com/client/v4/accounts/12fb04bba75c6666b35ac9678a60bc9d/ai/v1
+      api_key: os.environ/CF_API_KEY
 
 # ── MCP-Server-Registrierung (debate-server als SSE-MCP) ──────────────────
 mcp_servers:

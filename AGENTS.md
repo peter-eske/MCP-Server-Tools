@@ -77,6 +77,12 @@ docker push ghcr.io/peter-eske/mcp-debate-server:latest
 
 `Dockerfile` (python:3.12-slim) startet immer SSE. NGINX benötigt `proxy_buffering off`.
 
+**LiteLLM-Config:** Modelle werden in `model_list:` der `litellm-config.yaml` definiert (versioniert, reproduzierbar). **Nicht** über Admin-API `/model/new` verwalten – LiteLLM lädt DB-Modelle nicht automatisch in den Routing-Table. `store_model_in_db: true` + `model_list` = Modelle landen in beiden Welten.
+
+**DB-Backup:** `/root/backup_db.sh` auf VPS – `pg_dump` + gzip + 7-Tage-Retention. Manuell ausführbar nach Config-Änderungen.
+
+**Proxy-URL:** `http://ftbot.de:4000/v1` (OpenAI-kompatibel). `opencode.json` enthält alle 30 Modelle mit Limits.
+
 `docker-compose.yml`: Vollstack (PostgreSQL + LiteLLM + Debate-Server). `test/docker-compose.test.yml` analog.
 
 **CI/CD**: GitHub Actions – baut/pusht bei Änderungen an Dockerfile, Server, model_roles.yaml oder requirements.txt.

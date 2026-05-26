@@ -11,9 +11,9 @@ Test-Kategorien:
 
 Ausführung:
   cd MCP-Server-Tools
-  python tests/test_debate_server.py           # alle Tests
-  python tests/test_debate_server.py -k grund  # nur Kategorie A
-  python tests/test_debate_server.py -v        # verbose
+   python test/test_debate_server.py           # alle Tests
+   python test/test_debate_server.py -k grund  # nur Kategorie A
+   python test/test_debate_server.py -v        # verbose
 """
 
 import os

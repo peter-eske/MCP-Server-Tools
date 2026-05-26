@@ -217,13 +217,13 @@ Eigener Test-Runner (kein pytest, kein unittest):
 
 ```bash
 # Alle Tests
-python tests/test_debate_server.py
+python test/test_debate_server.py
 
 # Nur Kategorie A (Grundlagen)
-python tests/test_debate_server.py -k grund
+python test/test_debate_server.py -k grund
 
 # Ausführlich
-python tests/test_debate_server.py -v
+python test/test_debate_server.py -v
 ```
 
 **6 Test-Kategorien:**

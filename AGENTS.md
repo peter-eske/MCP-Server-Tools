@@ -51,9 +51,9 @@ Default-Modelle: `claude-3-5-sonnet`, `gpt-4o`, `gemini/gemini-2.5-flash`.
 
 **Custom-Test-Runner** (kein pytest):
 ```posh
-python tests/test_debate_server.py              # alle
-python tests/test_debate_server.py -k grund     # nur Kategorie A
-python tests/test_debate_server.py -v           # verbose
+python test/test_debate_server.py              # alle
+python test/test_debate_server.py -k grund     # nur Kategorie A
+python test/test_debate_server.py -v           # verbose
 ```
 
 6 Kategorien (A–F): Grundlagen, MCP-Transport, Debatten-Logik, SSE, Protokoll, Edge Cases.

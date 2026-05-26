@@ -270,7 +270,7 @@ def _register_at_litellm():
     for attempt in range(20):
         try:
             payload = j.dumps({
-                "server_name": "dynamische-ki-expertengruppe",
+                "server_name": "dynamische_ki_expertengruppe",
                 "transport": "sse",
                 "url": f"http://127.0.0.1:{os.environ.get('PORT', '8000')}/sse",
             }).encode()

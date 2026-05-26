@@ -39,7 +39,7 @@ services:
     container_name: debate-server
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - LITELLM_API_BASE=http://litellm-gateway:4000
       - LITELLM_API_KEY=${LITELLM_MASTER_KEY}

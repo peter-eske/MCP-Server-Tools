@@ -88,14 +88,14 @@ model_list:
 
 # ── MCP-Server-Registrierung (debate-server als SSE-MCP) ──────────────────
 mcp_servers:
-  dynamische-ki-expertengruppe:
+  dynamische_ki_expertengruppe:
     url: "http://debate-test-server:8000/sse"
     transport: "sse"
     description: "Dynamische-KI-Expertengruppe – KI-Debattenserver (Test)"
 
 litellm_settings:
   mcp_aliases:
-    "debate": "dynamische-ki-expertengruppe"
+    "debate": "dynamische_ki_expertengruppe"
   drop_params: true
   telemetry: false
   set_verbose: false

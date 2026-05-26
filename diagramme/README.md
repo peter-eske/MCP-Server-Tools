@@ -1,35 +1,29 @@
 # Diagramme – MCP-Server-Tools
 
-Dieser Ordner enthält Mermaid-Diagramme zur Architektur und zum Datenfluss.
+Dieser Ordner enthält Mermaid-Diagramme zur Systemarchitektur.
 
 ## Inhalt
 
 | Datei | Beschreibung |
 |---|---|
-| `architecture.mmd` | LangGraph-Architektur: Supervisor-basierter Experten-Dialog |
-| `code.mmd` | Kopie für mermaid.live (Gist-Datei) |
+| `architecture.mmd` | Vollständige Systemarchitektur mit allen Komponenten und Beziehungen |
 
-## In mermaid.live öffnen
+## Diagramm betrachten
 
-Im Editor bearbeiten:
+Das Diagramm wird im [Haupt-README](../README.md) direkt als Mermaid-Block gerendert.
+
+**Gist** (interaktiv auf GitHub):
+```
+https://gist.github.com/peter-eske/20ac8d850440b071579dac0bf1009475
+```
+
+**mermaid.live** (zum Bearbeiten):
 ```
 https://mermaid.live/edit?gist=https://gist.github.com/peter-eske/20ac8d850440b071579dac0bf1009475
 ```
 
-Nur anzeigen (View-Only):
-```
-https://mermaid.live/view?gist=https://gist.github.com/peter-eske/20ac8d850440b071579dac0bf1009475
-```
-
-## Wichtig
-
-Die Gist-Datei muss `code.mmd` heißen – das ist das von mermaid.live erwartete Format.
-
 ## Gist aktualisieren
 
-Nach Änderungen an `architecture.mmd` auch in `code.mmd` kopieren und Gist updaten:
-
 ```powershell
-cp diagramme/architecture.mmd diagramme/code.mmd
-gh gist edit 20ac8d850440b071579dac0bf1009475 diagramme/code.mmd
+gh gist edit 20ac8d850440b071579dac0bf1009475 diagramme/architecture.mmd
 ```

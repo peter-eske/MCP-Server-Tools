@@ -8,6 +8,7 @@ on:
       - 'advanced_debate_server.py'
       - 'model_roles.yaml'
       - 'requirements.txt'
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io

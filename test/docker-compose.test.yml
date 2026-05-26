@@ -1,3 +1,5 @@
+# ── Vollstack-Test-Umgebung: PostgreSQL + LiteLLM + Debate-Server ───────────
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -26,29 +28,24 @@ services:
     command: ["--port", "4000", "--config", "/app/config.yaml"]
     volumes:
       - ./litellm-config.yaml:/app/config.yaml:ro
-    environment:
-      - DATABASE_URL=postgresql://litellm:${POSTGRES_PASSWORD}@postgres:5432/litellm
     env_file:
-      - .env
+      - ../.env
     depends_on:
       postgres:
         condition: service_healthy
 
   debate-server:
-    build:
-      context: ..
-      dockerfile: Dockerfile
+    build: ..
     container_name: debate-test-server
     restart: unless-stopped
     ports:
       - "8000:8000"
     environment:
       - LITELLM_API_BASE=http://litellm-gateway:4000
-      - LITELLM_API_KEY=${OPENCODE_API_KEY}
-      - MCP_TRANSPORT=sse
+      - LITELLM_API_KEY=${LITELLM_MASTER_KEY}
       - PORT=8000
     env_file:
-      - .env
+      - ../.env
     depends_on:
       - litellm-gateway
     volumes:

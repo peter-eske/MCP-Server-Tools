@@ -1,0 +1,105 @@
+# Model-Rollen-Konfiguration für die Dynamische-KI-Expertengruppe
+# Jede Rolle hat eine Liste empfohlener Modelle (Top 3) + ein Default-Modell
+
+rollen:
+  Projektmanager:
+    beschreibung: "Koordiniert die Diskussion, fasst zusammen, priorisiert Anforderungen"
+    empfehlungen:
+      - claude-3-5-sonnet
+      - gpt-4o
+      - gemini/gemini-2.5-flash
+    default: claude-3-5-sonnet
+
+  System-Architekt:
+    beschreibung: "Entwirft Systemarchitektur, Komponentendiagramme, Schnittstellen"
+    empfehlungen:
+      - claude-3-5-sonnet
+      - gpt-4o
+      - gemini/gemini-2.5-flash
+    default: gpt-4o
+
+  Code-Analyst:
+    beschreibung: "Analysiert Code, schreibt Implementierungen, optimiert Algorithmen"
+    empfehlungen:
+      - claude-3-5-sonnet
+      - gpt-4o
+      - gemini/gemini-2.5-flash
+    default: claude-3-5-sonnet
+
+  Security-Experte:
+    beschreibung: "Prüft auf Sicherheitslücken, OWASP, Authentifizierung, Autorisierung"
+    empfehlungen:
+      - claude-3-5-sonnet
+      - gpt-4o
+      - gemini/gemini-2.5-flash
+    default: claude-3-5-sonnet
+
+  DB-Spezialist:
+    beschreibung: "Datenbankdesign, Abfrageoptimierung, Migrationen, Indizierung"
+    empfehlungen:
+      - gpt-4o
+      - claude-3-5-sonnet
+      - gemini/gemini-2.5-flash
+    default: gpt-4o
+
+  DevOps:
+    beschreibung: "Infrastruktur, CI/CD, Docker, Deployment, Monitoring"
+    empfehlungen:
+      - claude-3-5-sonnet
+      - gpt-4o
+      - gemini/gemini-2.5-flash
+    default: claude-3-5-sonnet
+
+  UI/UX-Designer:
+    beschreibung: "Benutzeroberflächen, Interaktionsdesign, Accessibility, Prototyping"
+    empfehlungen:
+      - gpt-4o
+      - claude-3-5-sonnet
+      - gemini/gemini-2.5-flash
+    default: gpt-4o
+
+  QA-Tester:
+    beschreibung: "Teststrategie, Testfälle, Fehlersuche, Testautomatisierung"
+    empfehlungen:
+      - claude-3-5-sonnet
+      - gpt-4o
+      - gemini/gemini-2.5-flash
+    default: claude-3-5-sonnet
+
+  Product-Owner:
+    beschreibung: "Anforderungsanalyse, Priorisierung, User Stories, Akzeptanzkriterien"
+    empfehlungen:
+      - gpt-4o
+      - claude-3-5-sonnet
+      - gemini/gemini-2.5-flash
+    default: gpt-4o
+
+  Performance-Optimierer:
+    beschreibung: "Laufzeitanalyse, Speichermanagement, Caching, Bottleneck-Erkennung"
+    empfehlungen:
+      - claude-3-5-sonnet
+      - deepseek-ai/deepseek-v4-flash
+      - gpt-4o
+    default: deepseek-ai/deepseek-v4-flash
+
+  Dokumentations-Experte:
+    beschreibung: "Technische Dokumentation, API-Referenzen, README, Changelog"
+    empfehlungen:
+      - gemini/gemini-2.5-flash
+      - gpt-4o
+      - claude-3-5-sonnet
+    default: gemini/gemini-2.5-flash
+
+  Kritischer-Reviewer:
+    beschreibung: "Code-Review, Architektur-Review, Risikoanalyse, Qualitätssicherung"
+    empfehlungen:
+      - claude-3-5-sonnet
+      - gpt-4o
+      - gemini/gemini-2.5-flash
+    default: claude-3-5-sonnet
+
+# Standard-Expertenliste (Fallback, wenn keine Auswahl getroffen wird)
+default_experten:
+  - claude-3-5-sonnet
+  - gpt-4o
+  - gemini/gemini-2.5-flash

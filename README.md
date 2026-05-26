@@ -1,6 +1,6 @@
 # Dynamische-KI-Expertengruppe
 
-**MCP-Server-Tools** — Einzeldaten-Python-MCP-Server, der eine Runde KI-Experten (Claude, GPT, Gemini) dynamisch zusammenbringt, diskutieren lässt und ein Synthese-Ergebnis liefert.
+**MCP-Server-Tools** — Einzeldaten-Python-MCP-Server, der eine Runde KI-Experten dynamisch zusammenbringt, diskutieren lässt und ein Synthese-Ergebnis liefert. Läuft immer SSE, immer über LiteLLM-Proxy.
 
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)](https://python.org)
 [![MCP](https://img.shields.io/badge/MCP-1.27-orange)](https://modelcontextprotocol.io)
@@ -17,99 +17,70 @@ Ein Chef-Modell moderiert eine asynchrone Debatte zwischen bis zu fünf KI-Exper
 flowchart LR
   classDef client fill:#6366f1,color:#fff
   classDef server fill:#f59e0b,color:#fff
-  classDef mode fill:#78716c,color:#fff
   classDef proxy fill:#3b82f6,color:#fff
   classDef model fill:#10b981,color:#fff
   classDef storage fill:#ef4444,color:#fff
-  classDef deploy fill:#14b8a6,color:#fff
+  classDef deploy fill:#14a8a6,color:#fff
   classDef test fill:#ec4899,color:#fff
-  classDef decision fill:#78716c,color:#fff
 
   subgraph Client["CLIENT"]
-    direction TB
-    C["MCP-Client (OpenCode)\nIT: ruft JSON-RPC-Tools auf | Alle: KI-Assistent"]
-  end
-
-  subgraph Transport["TRANSPORT"]
-    direction TB
-    TM{"MCP_TRANSPORT"}
-    Stdio["stdio\nIT: stdin/stdout-Pipe | Alle: Direktverbindung"]
-    SSE["sse\nIT: HTTP-Server :8000 | Alle: Netzwerkzugriff"]
-    TM -->|"Default"| Stdio
-    TM -->|"MCP_TRANSPORT=sse"| SSE
+    C["MCP-Client\nrufft JSON-RPC-Tools auf"]
   end
 
   subgraph Server["MCP DEBATE SERVER"]
     direction TB
-    S["advanced_debate_server.py\nIT: FastMCP, 3-Phasen-Debatte | Alle: KI-Debattenleiter"]
-    L["📁 Debate Logs\nIT: logs/debates/*.md | Alle: Gesprächsprotokolle"]
+    S["advanced_debate_server.py\nFastMCP, 3-Phasen-Debatte\nimmer SSE, immer Proxy"]
+    R["model_roles.yaml\n12 Rollen x Top 3 KIs"]
+    L["Debate Logs\nlogs/debates/*.md"]
+    S -.->|"liest"| R
     S -.->|"schreibt"| L
   end
 
-  subgraph Modi["BETRIEBSMODI (LITELLM_API_BASE)"]
+  subgraph Proxy["LITELM PROXY"]
     direction TB
-    PM["Proxy-Modus\nIT: OpenAI Client, max_retries=0 | Alle: sendet an KI-Verteiler"]
-    DM["Direkt-Modus\nIT: litellm.completion + RateLimit | Alle: spricht direkt mit KI"]
-    RL["⏱ RateLimiter\nIT: Token-Bucket 10 RPM | Alle: Drosselt bei Überlast"]
-  end
-
-  subgraph Proxy["LITELM PROXY (VPS / DOCKER)"]
-    direction TB
-    G["🔄 LiteLLM Gateway :4000\nIT: YAML-Routing, latency-based | Alle: KI-Verteiler"]
-    CFG["📄 Proxy-Config\nIT: beispiel-config.yaml | Alle: Modelle & Einstellungen"]
-    PG["🗄 PostgreSQL :5432\nIT: Usage-DB, API-Keys | Alle: Verwaltungsdatenbank"]
+    G["LiteLLM Gateway :4000\nYAML-Routing + MCP-Server"]
+    CFG["litellm-config.yaml\nModelle + mcp_servers:"]
+    PG["PostgreSQL :5432\nMCP-Persistenz, Usage-DB"]
     G -.->|"liest"| CFG
     G -.->|"speichert"| PG
   end
 
-  subgraph Modelle["KI-MODELLE (CLOUD-APIS)"]
-    direction TB
-    CLD["Claude 3.5 Sonnet\nIT: anthropic API | Alle: KI von Anthropic"]
-    GPT["GPT-4o\nIT: openai API | Alle: KI von OpenAI"]
-    GEM["Gemini 2.5 Flash\nIT: google API | Alle: KI von Google"]
+  subgraph Models["KI-MODELLE"]
+    CLD["Claude 3.5 Sonnet"]
+    GPT["GPT-4o"]
+    GEM["Gemini 2.5 Flash"]
+    NV["NVIDIA NIM\nv4-flash, llama, phi, qwen"]
   end
 
-  subgraph Deploy["DEPLOYMENT (DOCKER)"]
-    direction TB
-    D["🐳 Dockerfile\nIT: python:3.12-slim | Alle: Server-Paket"]
-    DC["📦 docker-compose.yml\nIT: Server + LiteLLM :4000 | Alle: Vorkonfiguriertes Setup"]
-    N["🌐 NGINX\nIT: proxy_buffering off für SSE | Alle: Internet-Empfang"]
-    D -->|"docker build"| DC
-    DC -->|"proxied by"| N
+  subgraph Deploy["DEPLOYMENT"]
+    D["Dockerfile\npython:3.12-slim"]
+    DC["docker-compose.yml\nPG + LiteLLM + Server"]
+    GH["CI/CD\nGitHub Actions -> GHCR"]
+    D -->|"build + push"| DC
+    DC -.->|"automatisch"| GH
   end
 
-  subgraph Test["TEST-INFRASTRUKTUR"]
-    direction TB
-    NV["🧪 NVIDIA NIM\nIT: deepseek-v4-flash | Alle: Test-KI-Modell"]
-    TC["🧪 docker-compose.test.yml\nIT: PG + LiteLLM + Server | Alle: Vollständige Test-Umgebung"]
-    NV <-->|"vollständiger Stack"| TC
+  subgraph Test["TESTS"]
+    NV2["NVIDIA NIM\nTest-Modell v4-flash"]
+    TC["docker-compose.test.yml\nGleiche Struktur"]
   end
 
-  C <-->|"MCP-Protokoll (JSON-RPC)"| TM
-  Stdio <-->|"request/response"| S
-  SSE <-->|"request/response"| S
-  S -->|"LITELLM_API_BASE gesetzt"| PM
-  S -->|"LITELLM_API_BASE leer"| DM
-  PM -->|"OpenAI Client"| G
-  DM -->|"litellm.completion"| RL
-  RL -->|"max 10 RPM"| G
-  G <-->|"anfragen / antworten"| CLD
-  G <-->|"anfragen / antworten"| GPT
-  G <-->|"anfragen / antworten"| GEM
-  G -.->|"optional"| NV
+  C <-->|"MCP über SSE"| S
+  S -->|"openai.OpenAI"| G
+  G <-->|"anfragen"| CLD
+  G <-->|"anfragen"| GPT
+  G <-->|"anfragen"| GEM
+  G <-->|"anfragen"| NV
   S -.->|"verpackt als"| D
 
   class C client
   class S server
-  class L storage
-  class TM,Stdio,SSE decision
-  class PM,DM mode
-  class RL test
+  class R,L storage
   class G proxy
   class CFG,PG storage
-  class CLD,GPT,GEM model
-  class D,DC,N deploy
-  class NV,TC test
+  class CLD,GPT,GEM,NV model
+  class D,DC,GH deploy
+  class NV2,TC test
 ```
 
 [📐 Vollständiges Diagramm als Gist](https://gist.github.com/peter-eske/20ac8d850440b071579dac0bf1009475)
@@ -120,12 +91,13 @@ flowchart LR
 
 | | |
 |---|---|
-| **🧠 Multi-Modell-Debatte** | Claude, GPT-4o und Gemini diskutieren Ihre Frage als unabhängige Experten |
+| **🧠 Multi-Modell-Debatte** | Claude, GPT-4o, Gemini und NVIDIA NIM diskutieren als unabhängige Experten |
 | **🎩 Chef-Moderation** | Ein Leitmodell steuert die Debatte dynamisch: rollenbasiert, parallel, zielgerichtet |
+| **📋 12 Experten-Rollen** | Rollen aus `model_roles.yaml` (Architekt, Security, DevOps, uvm.) |
 | **⏱ Hard Timeout** | Konfigurierbare Maximaldauer (Default 120s) – keine Endlos-Debatten |
-| **🔀 Zwei Betriebsmodi** | Proxy-Modus (OpenAI-Client, kein Rate-Limiting) oder Direkt-Modus (litellm, mit Rate-Limiter) |
+| **🔌 Immer SSE** | Server läuft als HTTP-SSE-Endpoint, immer über LiteLLM-Proxy |
 | **📁 Automatische Logs** | Jede Debatte wird als lesbare Markdown-Datei gespeichert |
-| **🐳 Docker-Ready** | Single-Stage Dockerfile + docker-compose für Produktion und Tests |
+| **🐳 Vollstack-Docker** | PostgreSQL + LiteLLM + Debate-Server in einem Stack |
 
 ---
 
@@ -138,14 +110,11 @@ flowchart LR
 # Dependencies installieren
 pip install -r requirements.txt
 
-# Server starten (stdio – Standard)
+# Server starten (SSE – Standard, immer)
 python advanced_debate_server.py
-
-# Oder mit Hot-Reload
-fastmcp dev advanced_debate_server.py
 ```
 
-Zum Ausführen wird ein API-Key für mindestens eines der Modelle benötigt. Im **Proxy-Modus** (empfohlen) liegt der Key auf dem LiteLLM-Proxy; im **Direkt-Modus** wird ein `LITELLM_API_KEY` benötigt.
+LITELLM_API_BASE muss gesetzt sein. Der Server startet als SSE-Server auf Port 8000.
 
 ---
 
@@ -153,36 +122,11 @@ Zum Ausführen wird ein API-Key für mindestens eines der Modelle benötigt. Im 
 
 | Variable | Effekt | Standard |
 |---|---|---|
-| `LITELLM_API_BASE` | **gesetzt** → Proxy-Modus (kein Rate-Limiting, OpenAI-Client); **nicht gesetzt** → Direkt-Modus (Rate-Limiting, litellm.completion) | `http://localhost:4000` |
+| `LITELLM_API_BASE` | **Required** – URL zum LiteLLM-Proxy | – |
 | `LITELLM_API_KEY` | API-Key für den Proxy | `""` |
-| `LITELLM_LOG` | Log-Level für litellm | — |
-| `LITELLM_SUPPRESS_INFO` | Provider-List-Spam unterdrücken | — |
-| `NVIDIA_RPM` | Requests pro Minute im Direkt-Modus | `10` |
-| `MCP_TRANSPORT` | `stdio` oder `sse` | `stdio` |
 | `PORT` / `HOST` | SSE-Port/Host | `8000` / `0.0.0.0` |
 
----
-
-## Betriebsmodi
-
-| Modus | `LITELLM_API_BASE` | API-Client | Rate-Limiting |
-|---|---|---|---|
-| **Proxy** | ✅ gesetzt | `openai.OpenAI` (max_retries=0) | ❌ deaktiviert |
-| **Direkt** | ❌ nicht gesetzt | `litellm.completion()` | ✅ Token-Bucket (10 RPM) |
-
-### Proxy-Modus (empfohlen)
-
-Der Server nutzt einen OpenAI-kompatiblen Client und sendet alle Anfragen an einen LiteLLM-Proxy, der die API-Keys verwaltet und das Routing übernimmt. **Keine Wartezeiten**, kein Rate-Limiting.
-
-```yaml
-# docker-compose.yml (Auszug)
-environment:
-  - LITELLM_API_BASE=http://host.docker.internal:4000
-```
-
-### Direkt-Modus
-
-Der Server spricht direkt mit den Modellen via `litellm.completion()`. Ein Token-Bucket-Rate-Limiter (Default 10 RPM) schützt vor Überlastung – konfigurierbar via `NVIDIA_RPM`.
+Nur **Proxy-Modus** – LITELLM_API_BASE muss gesetzt sein.
 
 ---
 
@@ -200,14 +144,32 @@ Führt eine vollständige Drei-Phasen-Debatte durch.
 
 | Parameter | Typ | Default | Beschreibung |
 |---|---|---|---|
-| `problemstellung` | `str` | — | Ihre Frage oder Aufgabe (Pflichtfeld) |
+| `problemstellung` | `str` | – | Ihre Frage oder Aufgabe (Pflichtfeld) |
 | `experten_modelle` | `list[str]` | Default-Modelle | 1–5 Modelle aus der verfügbaren Liste |
 | `maximale_sekunden` | `int` | 120 | Maximaldauer der gesamten Debatte |
 
-**Default-Experten:**
-```python
-["claude-3-5-sonnet", "gpt-4o", "gemini/gemini-2.5-flash"]
-```
+**Default-Experten**: Aus `model_roles.yaml` (`default_experten`), Fallback auf `claude-3-5-sonnet`, `gpt-4o`, `gemini/gemini-2.5-flash`.
+
+---
+
+## Experten-Rollen
+
+Die `model_roles.yaml` definiert 12 Rollen mit je 3 Modell-Empfehlungen:
+
+| Rolle | Beschreibung | Default-Modell |
+|---|---|---|
+| Projektmanager | Koordiniert, fasst zusammen, priorisiert | claude-3-5-sonnet |
+| System-Architekt | Entwirft Architektur, Komponenten, Schnittstellen | gpt-4o |
+| Code-Analyst | Analysiert Code, implementiert, optimiert | claude-3-5-sonnet |
+| Security-Experte | Prüft Sicherheit, OWASP, Auth | claude-3-5-sonnet |
+| DB-Spezialist | Datenbankdesign, Queries, Migrationen | gpt-4o |
+| DevOps | Infrastruktur, CI/CD, Deployment | claude-3-5-sonnet |
+| UI/UX-Designer | Oberflächen, Interaktion, Accessibility | gpt-4o |
+| QA-Tester | Teststrategie, Testfälle, Automatisierung | claude-3-5-sonnet |
+| Product-Owner | Anforderungen, User Stories | gpt-4o |
+| Performance-Optimierer | Laufzeit, Speicher, Caching | deepseek-v4-flash |
+| Dokumentations-Experte | Technische Dokumentation, API-Refs | gemini-2.5-flash |
+| Kritischer-Reviewer | Code/Architektur-Review, Risikoanalyse | claude-3-5-sonnet |
 
 ---
 
@@ -226,7 +188,7 @@ python test/test_debate_server.py -k grund
 python test/test_debate_server.py -v
 ```
 
-**6 Test-Kategorien:**
+**7 Test-Kategorien:**
 
 | Kategorie | Beschreibung |
 |---|---|
@@ -236,6 +198,7 @@ python test/test_debate_server.py -v
 | D – SSE-Transport | HTTP-Server, SSE-Endpoint |
 | E – Protokoll-Ausgabe | Format, Klassifikation, Dateipfad |
 | F – Edge Cases | Fehlende API-Keys, leere Modell-Liste |
+| G – MCP-Registrierung | Test der Fallback-Registrierung |
 
 **Voraussetzung:** `test/.env` mit `NVIDIA_API_KEY` (NVIDIA NIM als Test-Modell).
 
@@ -243,24 +206,25 @@ python test/test_debate_server.py -v
 
 ## Docker
 
-### Produktion (mit host-LiteLLM-Proxy)
+### Vollstack (PostgreSQL + LiteLLM + Debate-Server)
 
 ```bash
 docker compose up -d
 ```
 
-### Test-Stack (PostgreSQL + LiteLLM + Debate-Server)
+### Test-Stack
 
 ```bash
-docker compose -f docker-compose.test.yml up -d
+docker compose -f test/docker-compose.test.yml up -d
 ```
 
 ### Eigenständiges Build
 
 ```bash
 docker build -t ghcr.io/peter-eske/mcp-debate-server:latest .
-docker run -e LITELLM_API_BASE=http://proxy:4000 -e MCP_TRANSPORT=sse ghcr.io/peter-eske/mcp-debate-server:latest
 ```
+
+**CI/CD**: GitHub Actions baut und publiziert automatisch bei Änderungen an Dockerfile, Server, model_roles.yaml oder requirements.txt.
 
 **Wichtig für SSE:** NGINX benötigt `proxy_buffering off`, da SSE auf event-stream angewiesen ist.
 
@@ -279,15 +243,16 @@ Jede Debatte wird automatisch als Markdown-Datei unter `logs/debates/debate_{tim
 ## Entwicklung
 
 ```bash
-# Hot-Reload
-fastmcp dev advanced_debate_server.py
-
 # Dependencies
 pip install -r requirements.txt
+
+# Server starten
+python advanced_debate_server.py
 ```
 
-Das Projekt verwendet ausschließlich:
-- `mcp==1.27.1` — FastMCP-Server
-- `litellm==1.86.0` — LLM-Gateway
+Dependencies:
+- `mcp==1.27.1` – FastMCP-Server
+- `litellm==1.86.0` – LLM-Gateway
+- `pyyaml==6.0.2` – YAML-Parser
 
-**Wichtig:** `botocore` muss in der venv installiert sein (taucht als Abhängigkeit von litellm auf), sonst erscheinen `EventStream`-Warnungen bei Bedrock/SageMaker.
+**Wichtig:** `botocore` muss in der venv installiert sein, sonst erscheinen `EventStream`-Warnungen.

@@ -1,0 +1,90 @@
+# ── LiteLLM Proxy-Konfiguration (Vollstack mit MCP-Server) ────────────────
+
+model_list:
+  # ── ANTHROPIC (Cloud) ──────────────────────────────────────────────────
+  - model_name: claude-3-5-sonnet
+    litellm_params:
+      model: anthropic/claude-3-5-sonnet-20241022
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+  - model_name: claude-3-5-haiku
+    litellm_params:
+      model: anthropic/claude-3-5-haiku-20241022
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+  # ── OPENAI (Cloud) ─────────────────────────────────────────────────────
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+
+  - model_name: gpt-4o-mini
+    litellm_params:
+      model: openai/gpt-4o-mini
+      api_key: os.environ/OPENAI_API_KEY
+
+  # ── GOOGLE GEMINI (Cloud) ──────────────────────────────────────────────
+  - model_name: gemini/gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # ── NVIDIA NIM (Self-Hosted) ───────────────────────────────────────────
+  - model_name: deepseek-ai/deepseek-v4-flash
+    litellm_params:
+      model: openai/deepseek-ai/deepseek-v4-flash
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 8192
+      temperature: 0.2
+      num_retries: 0
+      request_timeout: 120
+
+  - model_name: qwen-3-coder-480b
+    litellm_params:
+      model: openai/qwen/qwen3-coder-480b-a35b-instruct
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 8192
+      temperature: 0.2
+      num_retries: 0
+      request_timeout: 300
+
+  - model_name: phi-4-mini
+    litellm_params:
+      model: openai/microsoft/phi-4-mini-instruct
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 2048
+      temperature: 0.5
+      num_retries: 0
+      request_timeout: 60
+
+  - model_name: llama-3.3-70b
+    litellm_params:
+      model: openai/meta/llama-3.3-70b-instruct
+      api_base: https://integrate.api.nvidia.com/v1
+      api_key: os.environ/NVIDIA_API_KEY
+      max_tokens: 4096
+      temperature: 0.2
+      num_retries: 0
+      request_timeout: 180
+
+# ── MCP-Server-Registrierung (debate-server als SSE-MCP) ──────────────────
+mcp_servers:
+  dynamische-ki-expertengruppe:
+    url: "http://debate-server:8000/sse"
+    transport: "sse"
+    description: "Dynamische-KI-Expertengruppe – KI-Debattenserver"
+
+litellm_settings:
+  mcp_aliases:
+    "debate": "dynamische-ki-expertengruppe"
+  drop_params: true
+  telemetry: false
+  set_verbose: false
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  store_model_in_db: true
+  supported_db_objects: ["mcp"]

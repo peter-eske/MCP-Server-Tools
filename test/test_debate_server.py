@@ -8,6 +8,8 @@ Test-Kategorien:
   C) Debatten-Logik: Vollständige Debatte, NEED_INFO, Zeitlimit
   D) SSE-Transport: Server-Start, SSE-Endpoint, MCP-Message
   E) Protokoll-Ausgabe: Format, Klassifikation, Datei-Pfad
+  F) Edge Cases: Fehlkonfiguration, Defaults, Modell-Kürzung
+  G) MCP-Registrierung: model_roles.yaml, _register_at_litellm
 
 Ausführung:
   cd MCP-Server-Tools
@@ -838,13 +840,93 @@ def test_f_edge_cases(t: TestResult):
     # F4: Debatte mit leerem Experten-Liste (Default verwendet)
     try:
         from advanced_debate_server import DEFAULT_EXPERTS
-        assert len(DEFAULT_EXPERTS) == 3
-        assert "claude-3-5-sonnet" in DEFAULT_EXPERTS
-        t.ok("DEFAULT_EXPERTS korrekt: 3 Modelle")
-    except AssertionError:
-        t.fail("DEFAULT_EXPERTS nicht korrekt")
+        assert len(DEFAULT_EXPERTS) >= 2
+        assert isinstance(DEFAULT_EXPERTS, list)
+        t.ok(f"DEFAULT_EXPERTS korrekt: {len(DEFAULT_EXPERTS)} Modelle")
     except Exception as e:
         t.fail(f"DEFAULT_EXPERTS: {e}")
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+#  G) MCP-REGISTRIERUNG & ROLLEN
+# ═════════════════════════════════════════════════════════════════════════════
+
+def test_g_mcp_registrierung(t: TestResult):
+    test_section("G – MCP-REGISTRIERUNG & ROLLEN")
+
+    # G1: model_roles.yaml existiert und enthält 12 Rollen
+    try:
+        import yaml
+        roles_path = os.path.join(PROJECT_ROOT, "model_roles.yaml")
+        assert os.path.exists(roles_path), "model_roles.yaml nicht gefunden"
+        with open(roles_path, encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+        assert "rollen" in data, "Kein 'rollen'-Key in model_roles.yaml"
+        rollen = data["rollen"]
+        assert len(rollen) == 12, f"Erwartet 12 Rollen, gefunden: {len(rollen)}"
+        erwartete_rollen = [
+            "Projektmanager", "System-Architekt", "Code-Analyst",
+            "Security-Experte", "DB-Spezialist", "DevOps",
+            "UI/UX-Designer", "QA-Tester", "Product-Owner",
+            "Performance-Optimierer", "Dokumentations-Experte", "Kritischer-Reviewer",
+        ]
+        for r in erwartete_rollen:
+            assert r in rollen, f"Rolle '{r}' fehlt"
+        for name, rolle in rollen.items():
+            assert "beschreibung" in rolle, f"Rolle '{name}' hat keine Beschreibung"
+            assert "empfehlungen" in rolle, f"Rolle '{name}' hat keine Empfehlungen"
+            assert len(rolle["empfehlungen"]) == 3, f"Rolle '{name}' hat nicht 3 Empfehlungen"
+            assert "default" in rolle, f"Rolle '{name}' hat kein default-Modell"
+        assert "default_experten" in data, "Kein 'default_experten'-Key"
+        assert len(data["default_experten"]) >= 2
+        t.ok("model_roles.yaml: 12 Rollen mit je 3 Empfehlungen + defaults")
+    except Exception as e:
+        t.fail(f"model_roles.yaml: {e}")
+
+    # G2: _load_model_roles-Funktion existiert und lädt korrekt
+    try:
+        from advanced_debate_server import _load_model_roles, _model_roles_data
+        data = _load_model_roles()
+        assert data is not None, "_load_model_roles() gibt None zurück"
+        assert "rollen" in data
+        assert _model_roles_data is not None, "_model_roles_data ist None"
+        t.ok("_load_model_roles() lädt model_roles.yaml korrekt")
+    except Exception as e:
+        t.fail(f"_load_model_roles: {e}")
+
+    # G3: _register_at_litellm-Funktion existiert
+    try:
+        from advanced_debate_server import _register_at_litellm
+        assert callable(_register_at_litellm)
+        t.ok("_register_at_litellm() ist vorhanden und aufrufbar")
+    except ImportError:
+        t.fail("_register_at_litellm nicht importierbar")
+    except Exception as e:
+        t.fail(f"_register_at_litellm: {e}")
+
+    # G4: Chef-Prompt enthält alle 12 Rollen
+    try:
+        from advanced_debate_server import CHEF_MODERATOR_PROMPT
+        rollen_im_prompt = [
+            "Projektmanager", "System-Architekt", "Code-Analyst",
+            "Security-Experte", "DB-Spezialist", "DevOps",
+            "UI/UX-Designer", "QA-Tester", "Product-Owner",
+            "Performance-Optimierer", "Dokumentations-Experte", "Kritischer-Reviewer",
+        ]
+        for r in rollen_im_prompt:
+            assert r in CHEF_MODERATOR_PROMPT, f"Rolle '{r}' fehlt im Chef-Prompt"
+        t.ok("Chef-Prompt enthält alle 12 Rollen")
+    except Exception as e:
+        t.fail(f"Chef-Prompt: {e}")
+
+    # G5: Server startet ohne RateLimiter (nur Proxy-Modus)
+    try:
+        from advanced_debate_server import _openai_client
+        assert _openai_client is not None
+        assert _openai_client.max_retries == 0
+        t.ok("OpenAI-Client erstellt (max_retries=0) – kein RateLimiter")
+    except Exception as e:
+        t.fail(f"OpenAI-Client: {e}")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -867,6 +949,7 @@ def main():
         ("D – SSE-Transport", test_d_sse_transport),
         ("E – Protokoll-Ausgabe", test_e_protokoll),
         ("F – Edge Cases", test_f_edge_cases),
+        ("G – MCP-Registrierung", test_g_mcp_registrierung),
     ]
 
     filter_text = args.filter.lower() if args.filter else ""

@@ -68,7 +68,7 @@ Steuerungshinweise:
 - max_tokens (optional): Sag dem Modell wie ausführlich es antworten soll. Default 1024.
 - max_sekunden (optional): Setzt die verbleibende Zeit für die Debatte neu. Niedrig = schneller beenden."""
 
-mcp = FastMCP("Dynamische-KI-Expertengruppe")
+mcp = FastMCP("Dynamische-KI-Expertengruppe", host="0.0.0.0")
 
 def save_debate_log(problem: str, protocol: str, final_result: str):
     log_dir = os.path.join(os.getcwd(), "logs", "debates")

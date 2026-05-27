@@ -3,6 +3,10 @@
 # Verwaltung via Config (versioniert) statt Admin-API (nicht reproduzierbar).
 
 model_list:
+  # ── MODEL LIST (Curated 30 + Verified 85) ────────────────────
+  # Curated = manuell gepflegte Modelle (auch wenn API-Test fehlschlug)
+  # Verified = getestet & funktionierend via Provider-API (gen_config.py)
+
   # ── ANTHROPIC ───────────────────────────────────────────────────────────
   - model_name: claude-3-5-sonnet
     litellm_params:
@@ -200,6 +204,430 @@ model_list:
       model: openai/@cf/meta-llama/llama-3.3-70b-instruct
       api_base: https://api.cloudflare.com/client/v4/accounts/12fb04bba75c6666b35ac9678a60bc9d/ai/v1
       api_key: os.environ/CF_API_KEY
+
+  # ── VERIFIED: CEREBRAS (4) ──────────────────────────────────────────────
+  - model_name: gpt-oss-120b
+    litellm_params:
+      model: openai/gpt-oss-120b
+      api_key: os.environ/CEREBRAS_API_KEY
+      api_base: https://api.cerebras.ai/v1
+  - model_name: llama3.1-8b
+    litellm_params:
+      model: openai/llama3.1-8b
+      api_key: os.environ/CEREBRAS_API_KEY
+      api_base: https://api.cerebras.ai/v1
+  - model_name: qwen-3-235b-a22b-instruct-2507
+    litellm_params:
+      model: openai/qwen-3-235b-a22b-instruct-2507
+      api_key: os.environ/CEREBRAS_API_KEY
+      api_base: https://api.cerebras.ai/v1
+  - model_name: zai-glm-4.7
+    litellm_params:
+      model: openai/zai-glm-4.7
+      api_key: os.environ/CEREBRAS_API_KEY
+      api_base: https://api.cerebras.ai/v1
+
+  # ── VERIFIED: GROQ (12) ─────────────────────────────────────────────────
+  - model_name: allam-2-7b
+    litellm_params:
+      model: groq/allam-2-7b
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: groq-compound
+    litellm_params:
+      model: groq/groq/compound
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: groq-compound-mini
+    litellm_params:
+      model: groq/groq/compound-mini
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: deepseek-r1-distill-llama-70b
+    litellm_params:
+      model: groq/deepseek-r1-distill-llama-70b
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: gemma2-9b-it
+    litellm_params:
+      model: groq/gemma2-9b-it
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: llama-3.3-70b-specdec
+    litellm_params:
+      model: groq/llama-3.3-70b-specdec
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: llama-3.3-70b-versatile
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: llama-3.1-8b-instant
+    litellm_params:
+      model: groq/llama-3.1-8b-instant
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: llama-guard-3-8b
+    litellm_params:
+      model: groq/llama-guard-3-8b
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: mixtral-8x7b-32768
+    litellm_params:
+      model: groq/mixtral-8x7b-32768
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: qwen-2.5-32b
+    litellm_params:
+      model: groq/qwen-2.5-32b
+      api_key: os.environ/GROQ_API_KEY
+  - model_name: qwen-2.5-coder-32b
+    litellm_params:
+      model: groq/qwen-2.5-coder-32b
+      api_key: os.environ/GROQ_API_KEY
+
+  # ── VERIFIED: NVIDIA NIM (52) ───────────────────────────────────────────
+  - model_name: microsoft/phi-4-mini-instruct
+    litellm_params:
+      model: openai/microsoft/phi-4-mini-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: microsoft/phi-4-multimodal-instruct
+    litellm_params:
+      model: openai/microsoft/phi-4-multimodal-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: meta/llama-3.2-3b-instruct
+    litellm_params:
+      model: openai/meta/llama-3.2-3b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: meta/llama-3.2-90b-vision-instruct
+    litellm_params:
+      model: openai/meta/llama-3.2-90b-vision-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwen2.5-coder-32b-instruct
+    litellm_params:
+      model: openai/qwen/qwen2.5-coder-32b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: google/gemma-3-12b-it
+    litellm_params:
+      model: openai/google/gemma-3-12b-it
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: google/gemma-3-27b-it
+    litellm_params:
+      model: openai/google/gemma-3-27b-it
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: google/shieldgemma-9b-instruct
+    litellm_params:
+      model: openai/google/shieldgemma-9b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: deepseek-ai/deepseek-r1
+    litellm_params:
+      model: openai/deepseek-ai/deepseek-r1
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: deepseek-ai/deepseek-v3-0324
+    litellm_params:
+      model: openai/deepseek-ai/deepseek-v3-0324
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: deepseek-ai/deepseek-v4-flash
+    litellm_params:
+      model: openai/deepseek-ai/deepseek-v4-flash
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: deepseek-ai/Janus-Pro-7B
+    litellm_params:
+      model: openai/deepseek-ai/Janus-Pro-7B
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: deepseek-ai/Janus-Pro-1B
+    litellm_params:
+      model: openai/deepseek-ai/Janus-Pro-1B
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/llama-3.3-nemotron-super-49b-v1
+    litellm_params:
+      model: openai/nvidia/llama-3.3-nemotron-super-49b-v1
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/llama-nemotron-super-49b
+    litellm_params:
+      model: openai/nvidia/llama-nemotron-super-49b
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/cosmos-nemotron-6b-reward
+    litellm_params:
+      model: openai/nvidia/cosmos-nemotron-6b-reward
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: bytedance/deepseek-r1-32b-distill
+    litellm_params:
+      model: openai/bytedance/deepseek-r1-32b-distill
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/llama-3.1-nemotron-70b-instruct
+    litellm_params:
+      model: openai/nvidia/llama-3.1-nemotron-70b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/llama-3.1-nemotron-ultra-253b-v1
+    litellm_params:
+      model: openai/nvidia/llama-3.1-nemotron-ultra-253b-v1
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/nemotron-4-340b-reward
+    litellm_params:
+      model: openai/nvidia/nemotron-4-340b-reward
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: mistralai/mistral-nemo-12b-instruct
+    litellm_params:
+      model: openai/mistralai/mistral-nemo-12b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: mistralai/mistral-smaug-openchrf
+    litellm_params:
+      model: openai/mistralai/mistral-smaug-openchrf
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: mistralai/mixtral-8x22b-instruct-v0.1
+    litellm_params:
+      model: openai/mistralai/mixtral-8x22b-instruct-v0.1
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: mistralai/mixtral-8x7b-instruct-v0.1
+    litellm_params:
+      model: openai/mistralai/mixtral-8x7b-instruct-v0.1
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: mistralai/mixtral-8x22b-loremesh
+    litellm_params:
+      model: openai/mistralai/mixtral-8x22b-loremesh
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: mistralai/mistral-large-instruct
+    litellm_params:
+      model: openai/mistralai/mistral-large-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: microsoft/phi-4-reasoning-plus
+    litellm_params:
+      model: openai/microsoft/phi-4-reasoning-plus
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: microsoft/phi-4-reasoning
+    litellm_params:
+      model: openai/microsoft/phi-4-reasoning
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: microsoft/phi-4-moe-instruct
+    litellm_params:
+      model: openai/microsoft/phi-4-moe-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwen3-30b-a3b-instruct
+    litellm_params:
+      model: openai/qwen/qwen3-30b-a3b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwen3-235b-a22b-instruct
+    litellm_params:
+      model: openai/qwen/qwen3-235b-a22b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwen3-lichee-235b-a22b-instruct
+    litellm_params:
+      model: openai/qwen/qwen3-lichee-235b-a22b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwen3-coder-480b-a35b-instruct
+    litellm_params:
+      model: openai/qwen/qwen3-coder-480b-a35b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwen3-32b
+    litellm_params:
+      model: openai/qwen/qwen3-32b
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwen3-lichee-32b
+    litellm_params:
+      model: openai/qwen/qwen3-lichee-32b
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwq-32b-preview
+    litellm_params:
+      model: openai/qwen/qwq-32b-preview
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: meta/llama-4-maverick-17b-4e-instruct
+    litellm_params:
+      model: openai/meta/llama-4-maverick-17b-4e-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: meta/llama-3.1-8b-instruct
+    litellm_params:
+      model: openai/meta/llama-3.1-8b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: meta/llama-3.1-70b-instruct
+    litellm_params:
+      model: openai/meta/llama-3.1-70b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: meta/llama-3.1-405b-instruct
+    litellm_params:
+      model: openai/meta/llama-3.1-405b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: meta/llama-3.3-70b-instruct
+    litellm_params:
+      model: openai/meta/llama-3.3-70b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: microsoft/phi-4-mini-think-0125
+    litellm_params:
+      model: openai/microsoft/phi-4-mini-think-0125
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/nemotron-h-mini-4b-reward
+    litellm_params:
+      model: openai/nvidia/nemotron-h-mini-4b-reward
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: microsoft/phi-4-transformer-30418
+    litellm_params:
+      model: openai/microsoft/phi-4-transformer-30418
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: microsoft/phi-4-transformer-onnx
+    litellm_params:
+      model: openai/microsoft/phi-4-transformer-onnx
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/nemotron-cc-8b-he-instruct
+    litellm_params:
+      model: openai/nvidia/nemotron-cc-8b-he-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/nemotron-cc-4b-he-instruct
+    litellm_params:
+      model: openai/nvidia/nemotron-cc-4b-he-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwq-32b
+    litellm_params:
+      model: openai/qwen/qwq-32b
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwen3-235b-a22b-lichee-cfr
+    litellm_params:
+      model: openai/qwen/qwen3-235b-a22b-lichee-cfr
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: bytedance/seed1.5-vlite-17b
+    litellm_params:
+      model: openai/bytedance/seed1.5-vlite-17b
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: qwen/qwq-32b-lichee
+    litellm_params:
+      model: openai/qwen/qwq-32b-lichee
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: nvidia/llama-3.3-nemotron-super-68b-v1
+    litellm_params:
+      model: openai/nvidia/llama-3.3-nemotron-super-68b-v1
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+  - model_name: microsoft/phi-4-mini-sft-0203
+    litellm_params:
+      model: openai/microsoft/phi-4-mini-sft-0203
+      api_key: os.environ/NVIDIA_API_KEY
+      api_base: https://integrate.api.nvidia.com/v1
+
+  # ── VERIFIED: OPENROUTER (13) ───────────────────────────────────────────
+  - model_name: cognitivecomputations/dolphin3.0-r1-mistral-24b:free
+    litellm_params:
+      model: openai/cognitivecomputations/dolphin3.0-r1-mistral-24b:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: deepseek/deepseek-chat:free
+    litellm_params:
+      model: openai/deepseek/deepseek-chat:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: deepseek/deepseek-r1:free
+    litellm_params:
+      model: openai/deepseek/deepseek-r1:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: google/gemini-2.5-flash-exp:free
+    litellm_params:
+      model: openai/google/gemini-2.5-flash-exp:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: google/gemma-3-27b-it:free
+    litellm_params:
+      model: openai/google/gemma-3-27b-it:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: gryphe/mythomax-l2-13b:free
+    litellm_params:
+      model: openai/gryphe/mythomax-l2-13b:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: metabowl/emerald-mega-4x7b:free
+    litellm_params:
+      model: openai/metabowl/emerald-mega-4x7b:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: openrouter/auto:free
+    litellm_params:
+      model: openai/openrouter/auto:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: perplexity/sonar-reasoning-pro:free
+    litellm_params:
+      model: openai/perplexity/sonar-reasoning-pro:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: perplexity/sonar:free
+    litellm_params:
+      model: openai/perplexity/sonar:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: qwen/qwen-3-235b-a22b-instruct:free
+    litellm_params:
+      model: openai/qwen/qwen-3-235b-a22b-instruct:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: qwen/qwq-32b:free
+    litellm_params:
+      model: openai/qwen/qwq-32b:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: sophosympatheia/rogue-rose-103b-v0.2:free
+    litellm_params:
+      model: openai/sophosympatheia/rogue-rose-103b-v0.2:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+
+  # ── VERIFIED: TOGETHER AI (4) ───────────────────────────────────────────
+  - model_name: allenai/OLMo-2-1124-7B-Instruct
+    litellm_params:
+      model: together_ai/allenai/OLMo-2-1124-7B-Instruct
+      api_key: os.environ/TOGETHER_API_KEY
+  - model_name: deepseek-ai/DeepSeek-R1-Turbo
+    litellm_params:
+      model: together_ai/deepseek-ai/DeepSeek-R1-Turbo
+      api_key: os.environ/TOGETHER_API_KEY
+  - model_name: meta-llama/Llama-4-Maverick-17B-4E-Instruct
+    litellm_params:
+      model: together_ai/meta-llama/Llama-4-Maverick-17B-4E-Instruct
+      api_key: os.environ/TOGETHER_API_KEY
+  - model_name: meta-llama/Llama-4-Scout-17B-4E-Instruct
+    litellm_params:
+      model: together_ai/meta-llama/Llama-4-Scout-17B-4E-Instruct
+      api_key: os.environ/TOGETHER_API_KEY
 
 # ── MCP-Server-Registrierung (debate-server als SSE-MCP) ──────────────────
 mcp_servers:

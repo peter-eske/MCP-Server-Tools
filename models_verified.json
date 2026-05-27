@@ -1,0 +1,767 @@
+[
+  {
+    "provider": "Cerebras",
+    "env_var": "CEREBRAS_API_KEY",
+    "model_id": "llama3.1-8b",
+    "litellm_model": "openai/llama3.1-8b",
+    "api_base": "https://api.cerebras.ai/v1",
+    "verified": "ok",
+    "duration": 0.36
+  },
+  {
+    "provider": "Cerebras",
+    "env_var": "CEREBRAS_API_KEY",
+    "model_id": "gpt-oss-120b",
+    "litellm_model": "openai/gpt-oss-120b",
+    "api_base": "https://api.cerebras.ai/v1",
+    "verified": "ok",
+    "duration": 0.41
+  },
+  {
+    "provider": "Cerebras",
+    "env_var": "CEREBRAS_API_KEY",
+    "model_id": "zai-glm-4.7",
+    "litellm_model": "openai/zai-glm-4.7",
+    "api_base": "https://api.cerebras.ai/v1",
+    "verified": "ok",
+    "duration": 0.42
+  },
+  {
+    "provider": "Cerebras",
+    "env_var": "CEREBRAS_API_KEY",
+    "model_id": "qwen-3-235b-a22b-instruct-2507",
+    "litellm_model": "openai/qwen-3-235b-a22b-instruct-2507",
+    "api_base": "https://api.cerebras.ai/v1",
+    "verified": "ok",
+    "duration": 1.03
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "openai/gpt-oss-20b",
+    "litellm_model": "groq/openai/gpt-oss-20b",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.19
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "openai/gpt-oss-120b",
+    "litellm_model": "groq/openai/gpt-oss-120b",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.2
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "llama-3.3-70b-versatile",
+    "litellm_model": "groq/llama-3.3-70b-versatile",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.23
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "llama-3.1-8b-instant",
+    "litellm_model": "groq/llama-3.1-8b-instant",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.24
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "allam-2-7b",
+    "litellm_model": "groq/allam-2-7b",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.41
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "meta-llama/llama-prompt-guard-2-86m",
+    "litellm_model": "groq/meta-llama/llama-prompt-guard-2-86m",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.3
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "meta-llama/llama-prompt-guard-2-22m",
+    "litellm_model": "groq/meta-llama/llama-prompt-guard-2-22m",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.3
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "openai/gpt-oss-safeguard-20b",
+    "litellm_model": "groq/openai/gpt-oss-safeguard-20b",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.21
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "groq/compound-mini",
+    "litellm_model": "groq/groq/compound-mini",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.39
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "litellm_model": "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.4
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "qwen/qwen3-32b",
+    "litellm_model": "groq/qwen/qwen3-32b",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.35
+  },
+  {
+    "provider": "Groq",
+    "env_var": "GROQ_API_KEY",
+    "model_id": "groq/compound",
+    "litellm_model": "groq/groq/compound",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.53
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "google/gemma-2-2b-it",
+    "litellm_model": "openai/google/gemma-2-2b-it",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.21
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "google/gemma-3n-e4b-it",
+    "litellm_model": "openai/google/gemma-3n-e4b-it",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.32
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "google/gemma-3n-e2b-it",
+    "litellm_model": "openai/google/gemma-3n-e2b-it",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.36
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "deepseek-ai/deepseek-v4-flash",
+    "litellm_model": "openai/deepseek-ai/deepseek-v4-flash",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.66
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-3.1-70b-instruct",
+    "litellm_model": "openai/meta/llama-3.1-70b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.35
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-3.2-11b-vision-instruct",
+    "litellm_model": "openai/meta/llama-3.2-11b-vision-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.31
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-3.2-3b-instruct",
+    "litellm_model": "openai/meta/llama-3.2-3b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.24
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-3.1-8b-instruct",
+    "litellm_model": "openai/meta/llama-3.1-8b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.42
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-guard-4-12b",
+    "litellm_model": "openai/meta/llama-guard-4-12b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.26
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-3.2-90b-vision-instruct",
+    "litellm_model": "openai/meta/llama-3.2-90b-vision-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.34
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "microsoft/phi-4-multimodal-instruct",
+    "litellm_model": "openai/microsoft/phi-4-multimodal-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.22
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "microsoft/phi-4-mini-instruct",
+    "litellm_model": "openai/microsoft/phi-4-mini-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.27
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "mistralai/ministral-14b-instruct-2512",
+    "litellm_model": "openai/mistralai/ministral-14b-instruct-2512",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.22
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "mistralai/mistral-7b-instruct-v0.3",
+    "litellm_model": "openai/mistralai/mistral-7b-instruct-v0.3",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.26
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "mistralai/mistral-large-3-675b-instruct-2512",
+    "litellm_model": "openai/mistralai/mistral-large-3-675b-instruct-2512",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.33
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "mistralai/mistral-medium-3.5-128b",
+    "litellm_model": "openai/mistralai/mistral-medium-3.5-128b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.3
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "mistralai/mistral-small-4-119b-2603",
+    "litellm_model": "openai/mistralai/mistral-small-4-119b-2603",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.25
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "mistralai/mistral-nemotron",
+    "litellm_model": "openai/mistralai/mistral-nemotron",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.44
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "mistralai/mixtral-8x7b-instruct-v0.1",
+    "litellm_model": "openai/mistralai/mixtral-8x7b-instruct-v0.1",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.31
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/ising-calibration-1-35b-a3b",
+    "litellm_model": "openai/nvidia/ising-calibration-1-35b-a3b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.25
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/gliner-pii",
+    "litellm_model": "openai/nvidia/gliner-pii",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.35
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/llama-3.1-nemoguard-8b-content-safety",
+    "litellm_model": "openai/nvidia/llama-3.1-nemoguard-8b-content-safety",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.32
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/llama-3.1-nemoguard-8b-topic-control",
+    "litellm_model": "openai/nvidia/llama-3.1-nemoguard-8b-topic-control",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.33
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/llama-3.1-nemotron-nano-8b-v1",
+    "litellm_model": "openai/nvidia/llama-3.1-nemotron-nano-8b-v1",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.21
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/llama-3.1-nemotron-nano-vl-8b-v1",
+    "litellm_model": "openai/nvidia/llama-3.1-nemotron-nano-vl-8b-v1",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.2
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
+    "litellm_model": "openai/nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.32
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/llama-3.3-nemotron-super-49b-v1",
+    "litellm_model": "openai/nvidia/llama-3.3-nemotron-super-49b-v1",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.32
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/nemotron-3-content-safety",
+    "litellm_model": "openai/nvidia/nemotron-3-content-safety",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.28
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+    "litellm_model": "openai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.45
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+    "litellm_model": "openai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.44
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-4-maverick-17b-128e-instruct",
+    "litellm_model": "openai/meta/llama-4-maverick-17b-128e-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 3.1
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/nemotron-3-nano-30b-a3b",
+    "litellm_model": "openai/nvidia/nemotron-3-nano-30b-a3b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.89
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/nemotron-content-safety-reasoning-4b",
+    "litellm_model": "openai/nvidia/nemotron-content-safety-reasoning-4b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.31
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/nemotron-mini-4b-instruct",
+    "litellm_model": "openai/nvidia/nemotron-mini-4b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.2
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/nemotron-nano-12b-v2-vl",
+    "litellm_model": "openai/nvidia/nemotron-nano-12b-v2-vl",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.31
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-3.3-70b-instruct",
+    "litellm_model": "openai/meta/llama-3.3-70b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 4.41
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/nvidia-nemotron-nano-9b-v2",
+    "litellm_model": "openai/nvidia/nvidia-nemotron-nano-9b-v2",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.24
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/riva-translate-4b-instruct-v1.1",
+    "litellm_model": "openai/nvidia/riva-translate-4b-instruct-v1.1",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.33
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+    "litellm_model": "openai/nvidia/llama-3.3-nemotron-super-49b-v1.5",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 2.98
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "openai/gpt-oss-120b",
+    "litellm_model": "openai/openai/gpt-oss-120b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.24
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "openai/gpt-oss-120b",
+    "litellm_model": "openai/openai/gpt-oss-120b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.41
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "openai/gpt-oss-20b",
+    "litellm_model": "openai/openai/gpt-oss-20b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.42
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "openai/gpt-oss-20b",
+    "litellm_model": "openai/openai/gpt-oss-20b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.4
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "moonshotai/kimi-k2.6",
+    "litellm_model": "openai/moonshotai/kimi-k2.6",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 4.78
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "qwen/qwen3.5-122b-a10b",
+    "litellm_model": "openai/qwen/qwen3.5-122b-a10b",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.56
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "sarvamai/sarvam-m",
+    "litellm_model": "openai/sarvamai/sarvam-m",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.23
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "stockmark/stockmark-2-100b-instruct",
+    "litellm_model": "openai/stockmark/stockmark-2-100b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.34
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "stepfun-ai/step-3.5-flash",
+    "litellm_model": "openai/stepfun-ai/step-3.5-flash",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.46
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "upstage/solar-10.7b-instruct",
+    "litellm_model": "openai/upstage/solar-10.7b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 0.23
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "qwen/qwen3-next-80b-a3b-instruct",
+    "litellm_model": "openai/qwen/qwen3-next-80b-a3b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 5.15
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "deepseek-ai/deepseek-v4-flash",
+    "litellm_model": "openai/deepseek-ai/deepseek-v4-flash",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 13.24
+  },
+  {
+    "provider": "NVIDIA NIM",
+    "env_var": "NVIDIA_API_KEY",
+    "model_id": "meta/llama-3.2-1b-instruct",
+    "litellm_model": "openai/meta/llama-3.2-1b-instruct",
+    "api_base": "https://integrate.api.nvidia.com/v1",
+    "verified": "ok",
+    "duration": 13.85
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "liquid/lfm-2.5-1.2b-instruct:free",
+    "litellm_model": "openai/liquid/lfm-2.5-1.2b-instruct:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 0.58
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "litellm_model": "openai/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 0.61
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "nvidia/nemotron-3-nano-30b-a3b:free",
+    "litellm_model": "openai/nvidia/nemotron-3-nano-30b-a3b:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 0.83
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "nvidia/nemotron-nano-12b-v2-vl:free",
+    "litellm_model": "openai/nvidia/nemotron-nano-12b-v2-vl:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 2.08
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "openrouter/free",
+    "litellm_model": "openai/openrouter/free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 0.59
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "openai/gpt-oss-120b:free",
+    "litellm_model": "openai/openai/gpt-oss-120b:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 1.44
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "poolside/laguna-xs.2:free",
+    "litellm_model": "openai/poolside/laguna-xs.2:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 0.84
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "poolside/laguna-m.1:free",
+    "litellm_model": "openai/poolside/laguna-m.1:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 1.6
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "openai/gpt-oss-20b:free",
+    "litellm_model": "openai/openai/gpt-oss-20b:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 3.92
+  },
+  {
+    "provider": "Together AI",
+    "env_var": "TOGETHER_API_KEY",
+    "model_id": "LiquidAI/LFM2-24B-A2B",
+    "litellm_model": "together_ai/LiquidAI/LFM2-24B-A2B",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 1.29
+  },
+  {
+    "provider": "Together AI",
+    "env_var": "TOGETHER_API_KEY",
+    "model_id": "arize-ai/qwen-2-1.5b-instruct",
+    "litellm_model": "together_ai/arize-ai/qwen-2-1.5b-instruct",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.31
+  },
+  {
+    "provider": "Together AI",
+    "env_var": "TOGETHER_API_KEY",
+    "model_id": "deepcogito/cogito-v2-1-671b",
+    "litellm_model": "together_ai/deepcogito/cogito-v2-1-671b",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 0.63
+  },
+  {
+    "provider": "Together AI",
+    "env_var": "TOGETHER_API_KEY",
+    "model_id": "essentialai/rnj-1-instruct",
+    "litellm_model": "together_ai/essentialai/rnj-1-instruct",
+    "api_base": "",
+    "verified": "ok",
+    "duration": 1.09
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "nvidia/nemotron-nano-9b-v2:free",
+    "litellm_model": "openai/nvidia/nemotron-nano-9b-v2:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 12.96
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "liquid/lfm-2.5-1.2b-thinking:free",
+    "litellm_model": "openai/liquid/lfm-2.5-1.2b-thinking:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 16.61
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "openrouter/owl-alpha",
+    "litellm_model": "openai/openrouter/owl-alpha",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 16.62
+  },
+  {
+    "provider": "OpenRouter",
+    "env_var": "OPENROUTER_API_KEY",
+    "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
+    "litellm_model": "openai/nvidia/nemotron-3-super-120b-a12b:free",
+    "api_base": "https://openrouter.ai/api/v1",
+    "verified": "ok",
+    "duration": 21.09
+  }
+]
